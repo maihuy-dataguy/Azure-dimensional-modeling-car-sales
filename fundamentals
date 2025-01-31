@@ -1,0 +1,29 @@
+- Có thể connect vô on-premise sql server thông qua source dataset của ADF (cần server name, username, password, encript optional)
++ grant select on schema::dbo to user1 (cấp quyền toàn bộ bảng trong schema)
++ grant select on salesLT.address(table) to user1
+sql server có system catalog view gồm các system table, sys.tables, sys.schemas, join 2 bảng đó với nhau để lấy toàn bộ tên bảng và tên schema (có thể dựa theo tên schema nào đó), hoặc dùng information_schema.tables
+- Có thể tạo sql sever trên azure sql database, có sãn sample mẫu adventure works
+- Change data capture(CDC) hay gọi là increamental loading: the process of identifying and capturing changes made to data in a database and then delivering those changes in real-time to a downstream process or system.
+- Storage account có 3 tier là hot(access mỗi ngày), cool (mỗi tháng 1 lần), cold(ko xài trong 6 tháng): chi phí storing 
+
+---SQL Database
+thấp nhất nhưng khi access price sẽ go up
+- SQl deployment option: sql databases (azure quản lý mọi thứ), SQL managed instance( có nhiều liberty cho admin task), SQL virtual manchines(tạo máy ảo  có sql server trên đó, copy y chang)
+- Cần add access policy của key vault cho managed identity của ADF để ADF có thể connect vs vault key
+- Cần cho phép sql server networking có thể connect với azure service và resource, vì mặc định sql verser có 1 số firewall rule ko cho phép ip lạ có thể truy cập 
+
+--Databricks
+- dbutils.notebook.exit(output_json:string): dùng để đẩy output ra từ note as a json, khi chạy adf: lấy output từ 1 databricks notebook bàng cách @string(activity('notebook1').output.runOutput) và chuyển thành string (optional)
+- dim_key là surrorate key dùng để join với bảng fact, còn model_id(natural key) sẽ dùng để join với bảng ở silver layer
+- Dùng surrogate key để đơn giản việc foin bảng fact và bảng dimension, query numeric cũng sẽ nhanh hơn text
+- silver layer(new data) left join gold_table, if dim_key từ gold_table là null thì là insert, còn ko thì update, data dc insert  với dim_key = 1+max_dim_key của gold_table hiện tại(1 là index của new record), initial load thì max_dim_key là 0
+- collect chuyển dataframe thành list(row[])
+- df_filer_new.withColumn('dim_model_key',max_dim_model_key+1+monotonically_increasing_id()): dùng để tăng idx dần 
+- window function ko by partition có thể bị out of memory
+- SCD với delta lake bằng merge https://docs.databricks.com/en/delta/merge.html 
+ + whenMatchedUpdateAll(),whenNotMatchedInsertAll(),whenNotMatchedBySourceDelete(condition=),whenMatchedDelete whenNotMatchedBySourceUpdate(condition=)
+- Fact chứa các dimension_key dc combine tạo thành 1 khóa chính tổng hợp cho bảng fact
+- Chia  1 big table thành dimensional modeling dùng để đơn giản hóa data understanding, chia nhiều bảng dimension để có thể query khi cần, nếu ko thì phải sử dụng  distinct lên 1 bảng lớn (hiệu suất ko cao), chia thành các bảng dimensions giúp handle slowly changing dimension hiệu quả hơn cũng như là incremental loading.
+- One big table khi grow in size (có thể bị bottle neck khi query do cần scan nguyên table), one big talbe tốn nhiều storage(data redundancy), ng ta thường lưu trữ one big table ở silver layer và dimensional modeling ở gold_layer, tuy nhiên nếu one big table ít cột (tách ra chỉ dc 2-3 dimension table) thì dùng one big table sẽ có lợi hơn
+- Rất hiếm khi upsert fact table nhưng vẫn có scenario update transaction nên vẫn cứ chuẩn bị
+- trong window function, order by và partition by chung 1 cột thì sẽ lấy theo partition giống nhau và đánh số bất chất order by 
