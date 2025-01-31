@@ -33,5 +33,6 @@ Responsible for orchestrating and scheduling the whole flow:
 - **Azure Data Factory (ADF)**: For orchestrating data movement and transformation.
 - **Azure Data Lake Storage (ADLS)**: For storing raw and processed data.
 - **Azure Databricks**: For data transformation and processing.
+- **Delta Lake** : For table format that extends Parquet data files with a file-based transaction log for ACID transactions and scalable metadata handling.
 - **Power BI**: For data visualization and reporting.
 - **Azure Key Vault**: For securely managing credentials and secrets.
