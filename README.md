@@ -1,7 +1,7 @@
 # Azure Car Sales Statistics-Incremental automated pipieline project
 
 ## Introduction
-This project serves as a comprehensive implementation to building an end-to-end data engineering pipeline. It covers each stage from data ingestion to processing and finally to storage, utilizing Azure Cloud Services, using incremental loading, handling slow changing dimensions and buidling Star Schema in the gold layer for business analysis
+This project serves as a comprehensive implementation to building an end-to-end data engineering pipeline. It covers each stage from data ingestion to processing and finally to storage, utilizing Azure Cloud Services, using incremental loading, handling slowly changing dimensions and buidling Star Schema in the gold layer for business analysis
 
 
 ## System Architecture
