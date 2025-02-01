@@ -22,7 +22,7 @@ Serving layer can be connected through Power BI for Business Analysis facilitati
 ## Azure Data Factory (ADF)
 ![System Architecture](https://github.com/maihuy-dataguy/Azure-dimensional-modeling-car-sales/blob/main/pics/ETL.png)
 Responsible for orchestrating and scheduling the whole flow:
-- ✅ Ingesting increamental data and storing fetched data in azure data lakehouse at bronze layer
+- ✅ Ingesting increamental data and storing fetched data in azure data lake at bronze layer
 - ✅ Using DataBricks LakeHouse Architecture to handle and transform data from silver and build dimensional modeling at serving layer, adding surrogate key, handing Slowing Changing Dimension. 
 - ✅ Dynamic Automation, parameterized pipeline
 - ✅ Manage security, IAM, Keyvault 
