@@ -4,10 +4,9 @@
 sql server có system catalog view gồm các system table, sys.tables, sys.schemas, join 2 bảng đó với nhau để lấy toàn bộ tên bảng và tên schema (có thể dựa theo tên schema nào đó), hoặc dùng information_schema.tables
 - Có thể tạo sql sever trên azure sql database, có sãn sample mẫu adventure works
 - Change data capture(CDC) hay gọi là increamental loading: the process of identifying and capturing changes made to data in a database and then delivering those changes in real-time to a downstream process or system.
-- Storage account có 3 tier là hot(access mỗi ngày), cool (mỗi tháng 1 lần), cold(ko xài trong 6 tháng): chi phí storing 
+- Storage account có 3 tier là hot(access mỗi ngày), cool (mỗi tháng 1 lần), cold(ko xài trong 6 tháng): chi phí storing thấp nhất nhưng khi access price sẽ go up
 
 ---SQL Database
-thấp nhất nhưng khi access price sẽ go up
 - SQl deployment option: sql databases (azure quản lý mọi thứ), SQL managed instance( có nhiều liberty cho admin task), SQL virtual manchines(tạo máy ảo  có sql server trên đó, copy y chang)
 - Cần add access policy của key vault cho managed identity của ADF để ADF có thể connect vs vault key
 - Cần cho phép sql server networking có thể connect với azure service và resource, vì mặc định sql verser có 1 số firewall rule ko cho phép ip lạ có thể truy cập 
