@@ -14,7 +14,7 @@ We use car_sales data from [SalesData.csv](https://github.com/maihuy-dataguy/Azu
 We transfer our data between these layers including bronze, silver, gold layers.
 - Bronze Layer: The raw data will be periodically loaded from Azure SQL Database, only incremental data is allowed to enter bronze storage.
 - Silver layer: On a daily basis, the incremental data would be transformed in silver layer for analysis requirements.
-- Gold layer: The big table from silver layer would separated into multiple dimension tables and fact table following Star Schema Modeling. Data Analyst and Data Scientist can get their hands on these table for Business Inteligence and Modeling.
+- Gold layer: The big table from silver layer would separated into multiple dimension tables and fact table following Star Schema Modeling. Data Analyst and Data Scientist can get their hands on these tables for Business Inteligence and Modeling.
 
 Serving layer can be connected through Power BI for Business Analysis facilitating decision-making.
 
@@ -23,7 +23,7 @@ Serving layer can be connected through Power BI for Business Analysis facilitati
 ![System Architecture](https://github.com/maihuy-dataguy/Azure-dimensional-modeling-car-sales/blob/main/pics/ETL.png)
 Responsible for orchestrating and scheduling the whole flow:
 - ✅ Ingesting increamental data and storing fetched data in azure data lake at bronze layer
-- ✅ Using DataBricks LakeHouse Architecture to handle and transform data from silver and build dimensional modeling at serving layer, adding surrogate key, handing Slowing Changing Dimension. 
+- ✅ Using DataBricks LakeHouse Architecture to handle and transform data from silver and build dimensional modeling at serving layer, adding surrogate key, handling Slowly Changing Dimension. 
 - ✅ Dynamic Automation, parameterized pipeline
 - ✅ Manage security, IAM, Keyvault 
 
