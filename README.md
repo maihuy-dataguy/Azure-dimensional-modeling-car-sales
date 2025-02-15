@@ -30,7 +30,7 @@ Responsible for orchestrating and scheduling the whole flow:
 ## CI/CD pipeline with Azure DevOps
 ![System Architecture](https://github.com/maihuy-dataguy/Azure-dimensional-modeling-car-sales/blob/main/pics/cicd_flow.png)
 Responsible for automating the whole building and continuous deploying data into 3 different environments:
-- ✅ 3 different ADF resources, 3 separate storage account (ADLS Gen2)
+- ✅ 3 different ADF resources, 3 separate storage accounts (ADLS Gen2)
 - ✅ Including dev environment, QC testing environment, production environment for diverse downstream.
 - ✅ Git management, continous integration for validating, continous deploying into dev and testing whenever pull requests into main branch are approved. The production deployment is manually approved.
 
